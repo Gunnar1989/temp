@@ -1,0 +1,57 @@
+@import "./colors.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+  color: $lightblue;
+  background-color: $lightblue;
+  font-family: "Lato", sans-serif;
+}
+.profile {
+  width: auto;
+  height: 200px;
+}
+.hero {
+  background-image: url("http://www.vitasim.dk/wp-content/uploads/2019/11/AdobeStock_271679335.jpeg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 92vh;
+}
+.box {
+  color: $white;
+  background-color: $primary !important;
+}
+.box label {
+  color: $white;
+}
+.menu-list li p {
+  padding: 0.5em 0.75em;
+  border-radius: 2px;
+  display: block;
+}
+.navbar {
+  margin: 0;
+  a {
+    color: $lightblue;
+    font-weight: 500;
+  }
+
+  .has-dropdown input {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  :hover {
+    color: $primary;
+  }
+  .navbar-dropdown a {
+    font-size: 14px;
+    font-weight: bold;
+    color: $primary;
+  }
+
+  article .box {
+    color: $white !important;
+  }
+}
+
+@import "~bulma/bulma.sass";
