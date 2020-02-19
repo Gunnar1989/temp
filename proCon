@@ -1,0 +1,54 @@
+Authentication
+Scaleability
+
+Query to storage are free
+
+As a Teacher
+X I can login to the app and access features.
+
+
+As a teacher, after logging in
+/ I can see information about the content that i have created, so that i can gain an overview and access advanced features regarding content. 
+/ I can assign content to students so that they can see it in thire homework / available content.
+I can delete content
+? I can edit the meta data about a content file (name, description, other?)
+
+Student management
+I can see all the students assigned to my courses
+/ I can remove and assign students to a course/group
+X I can assign content to an entire course/group of people
+
+Profile information / practical
+X I can see my own profile information
+/ I can edit my profile information
+? I can contact the service provider (VitaSim) or the organisational admin so that i can get help if anything should go wrong
+? I can see the organisation that i am a part of so that i know who to contact about our subscription to the software.
+logging in for the first time i get promted to change my password
+
+Course / groups
+X I can create and edit courses
+X I can upload new content from external sources, if they have the right format, 
+? I can preview 2D and 360* videos as a student would 
+(Only 360 if the phone supports it)
+I can make content public for everyone to see
+I can browse public content and assign it to groups/students
+
+As the organisation admin 
+I can login to the app
+As the organisation admin, after logging in 
+I can see and change organisation information
+I can create/delete/edit teacher users
+I can create/delete/edit student users
+I can import users from external fiels of a predefined format (maybe .csv?)
+I can access VitaSim support information
+I can add/remove/edit what VR hardware is available 
+
+As a student
+X I can login to the application so that i can get access to the app functionality
+? I can see homework content and due date, so that i know when to finish it.
+? I can read instructions on how to use the hardware.
+? I can watch 2D demonstrations
+? I can watch 360* video (if phone supports)
+X I can browse public content and view it.
+? I can book a VR headset for a time period
+? I can see avaiable VR headsets

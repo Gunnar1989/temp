@@ -142,8 +142,6 @@ export function AuthProvider({ initialUser, children }) {
       member: group.member,
       owner: group.owner
     };
-    console.log("?????");
-    console.log(data);
     const db = firebase.firestore();
     db.collection("classrooms")
       .doc()
@@ -451,9 +449,12 @@ export function AuthProvider({ initialUser, children }) {
         res.items.forEach(async function(itemRef) {
           await itemRef.getDownloadURL().then(async url => {
             await itemRef.getMetadata().then(async data => {
-              if (data.customMetadata.access === "Math") {
-                result.push({ itemRef, url, data });
-              }
+              let bs = data.customMetadata.access.split(",");
+              bs.forEach(b => {
+                if (b === ref) {
+                  result.push({ itemRef, url, data });
+                }
+              });
             });
           });
         });
@@ -491,13 +492,32 @@ export function AuthProvider({ initialUser, children }) {
       });
     return result;
   };
+  const changeMetadata = (group, file) => {
+    const storage = firebase.storage();
+    var newMetadata = {
+      customMetadata: {
+        access: "Math, Science"
+      }
+    };
+    storage
+      .ref("shared")
+      .child("chicken.jpg")
+      .updateMetadata(newMetadata)
+      .then(function(metadata) {
+        // Updated metadata for 'images/forest.jpg' is returned in the Promise
+        console.log("Updated brah.");
+        console.log(metadata);
+      })
+      .catch(function(error) {
+        // Uh-oh, an error occurred!
+      });
+  };
   const getClassRooms = async group => {
     toggleLoading(true);
-    console.log(group);
     const storage = firebase.storage();
     let result = [];
     await storage
-      .ref("Classes/" + group)
+      .ref(group)
       .then(async function(res) {
         res.prefixes.forEach(async function(folderRef) {
           let img = await getClassRoomImage(folderRef.name);
@@ -632,6 +652,7 @@ export function AuthProvider({ initialUser, children }) {
 
   const value = {
     addUserToGroup,
+    changeMetadata,
     createUserGroup,
     downloadFile,
     downloadMulti,

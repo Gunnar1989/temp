@@ -45,7 +45,7 @@ export default function EditProfile() {
           path={`profile_pictures/${user.uid}/`}
           type="profile.jpg"
         />
-        <img src={image} width="100px" heigh="300px" />
+        <img alt="Profile" src={image} width="100px" heigh="300px" />
         <div className="field">
           <label className="label">Email</label>
           <div className="control">

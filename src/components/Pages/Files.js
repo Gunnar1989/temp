@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useAuth from "../../auth/use-auth";
 import NewFile from "./NewFile";
+import File from "../Elements/File";
 import * as HELPER from "../util/use";
 
 export default function Files() {
@@ -10,7 +11,7 @@ export default function Files() {
   const [filesActive, setFilesActive] = useState(true);
   const [folders, setFolders] = useState([]);
   const [files, setFiles] = useState([]);
-  const [moreFiles, setMoreFiles] = useState([]);
+  const [selectedFile, setSelectedFile] = useState("");
   const [selectFiles, setSelectFiles] = useState([]);
   const [storagePath, setStoragePath] = useState("");
   const {
@@ -25,18 +26,18 @@ export default function Files() {
 
   useEffect(() => {
     async function fetch() {
-      await getClassRoomData();
-      //await getFileAccessData();
-      await getFilesFromFolder();
+      //await getClassRoomData();
+      await getFileAccessData();
+      //await getFilesFromFolder();
       await filesLoaded();
     }
     fetch();
   }, []);
 
   const getData = async () => {
-    await getClassRoomData();
-    //await getFileAccessData();
-    await getFilesFromFolder();
+    //await getClassRoomData();
+    await getFileAccessData();
+    //await getFilesFromFolder();
     await filesLoaded();
   };
   const filesLoaded = async () => {
@@ -52,7 +53,7 @@ export default function Files() {
     });
   };
   const getFileAccessData = async () => {
-    getFilesAccess("Math").then(result => {
+    getFilesAccess(path).then(result => {
       populateFiles(result);
     });
   };
@@ -63,13 +64,10 @@ export default function Files() {
   };
   const populateFiles = async result => {
     setTimeout(async () => {
-      await setStoragePath(path);
+      setStoragePath(path);
       setFiles(result);
     }, 700);
   };
-  /*const getBack = () => {
-    getData(storagePath.match("[^/]*")[0]);
-  };*/
   const handleChange = (target, file) => {
     if (target.checked) {
       setSelectFiles([...selectFiles, file]);
@@ -77,14 +75,17 @@ export default function Files() {
       setSelectFiles(HELPER.arrayRemove(selectFiles, file));
     }
   };
-
+  const editFile = async file => {
+    setSelectedFile(file[0]);
+    console.log(file[0]);
+  };
   return (
     <section>
       <div className="container">
         <h1 className="title">Files for {storagePath}</h1>
         <div className="columns">
           <div className="column is-3 ">
-            <aside className="menu has-background-white-bis">
+            <div className="menu has-background-white-bis">
               <div className="message-header has-background-primary">
                 <p>Filters</p>
               </div>
@@ -133,22 +134,8 @@ export default function Files() {
               <ul className="menu-list">
                 <li>PDF</li>
               </ul>
-              {/*
-                <ul className="menu-list">
-                  <li>
-                    {storagePath.includes("/") && (
-                      <input
-                        className="button"
-                        type="button"
-                        value={`Back to ${storagePath.match("[^/]*")}`}
-                        onClick={() => getBack()}
-                      />
-                    )}
-                  </li>
-                </ul>
-                    */}
-            </aside>
-            <aside className="menu has-background-white-bis">
+            </div>
+            <div className="menu has-background-white-bis">
               <div className="message-header has-background-primary">
                 <p>Admin</p>
               </div>
@@ -159,7 +146,7 @@ export default function Files() {
                   </a>
                 </li>
               </ul>
-            </aside>
+            </div>
           </div>
           <div className="column is-9">
             <table className="table is-bordered has-background-white-bis is-striped">
@@ -188,7 +175,7 @@ export default function Files() {
                       <td className="has-text-centered">
                         <input
                           type="checkbox"
-                          onClick={e => handleChange(e.target, file.url)}
+                          onClick={e => handleChange(e.target, file)}
                         />
                       </td>
                     </tr>
@@ -206,7 +193,16 @@ export default function Files() {
               value="Download Selected Files"
               onClick={() => downloadMulti(selectFiles)}
             />
+            <input
+              className="button"
+              type="button"
+              value="Edit File"
+              onClick={() => editFile(selectFiles)}
+            />
           </div>
+        </div>
+        <div className="column">
+          {selectedFile != "" && <File selectedFile={selectedFile} />}
         </div>
       </div>
       {modalActive && (
