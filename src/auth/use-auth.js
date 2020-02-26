@@ -313,11 +313,12 @@ export function AuthProvider({ initialUser, children }) {
       }
     );
   };
-  const uploadSharedFile = (file, classroom) => {
+  const uploadSharedFile = (file, classroom, descriptionData) => {
     const storage = firebase.storage();
     var metadata = {
       customMetadata: {
-        access: classroom
+        access: classroom,
+        description: descriptionData
       }
     };
     const uploadTask = storage.ref(`shared/${file.name}`).put(file, metadata);
@@ -336,12 +337,11 @@ export function AuthProvider({ initialUser, children }) {
     );
   };
 
-  const getGroups = async id => {
+  const getGroups = async () => {
     const db = firebase.firestore();
-    let usersRef = db.collection("groups");
-    let users = [];
+    let usersRef = db.collection("classrooms");
+    let groups = [];
     await usersRef
-      .where("userName", "==", id)
       .get()
       .then(snapshot => {
         if (snapshot.empty) {
@@ -349,7 +349,7 @@ export function AuthProvider({ initialUser, children }) {
           return;
         }
         snapshot.forEach(doc => {
-          users.push({
+          groups.push({
             ...doc.data()
           });
         });
@@ -359,7 +359,7 @@ export function AuthProvider({ initialUser, children }) {
         return;
       });
 
-    return users;
+    return groups;
   };
 
   const uploadImage = (image, path, type) => {
@@ -451,7 +451,7 @@ export function AuthProvider({ initialUser, children }) {
             await itemRef.getMetadata().then(async data => {
               let bs = data.customMetadata.access.split(",");
               bs.forEach(b => {
-                if (b === ref) {
+                if (b.trim() === ref) {
                   result.push({ itemRef, url, data });
                 }
               });
@@ -662,6 +662,7 @@ export function AuthProvider({ initialUser, children }) {
     getFiles,
     getFilesAccess,
     getGroupInfo,
+    getGroups,
     getImage,
     getLoggedInUser,
     getUser,

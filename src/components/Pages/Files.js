@@ -55,6 +55,7 @@ export default function Files() {
   const getFileAccessData = async () => {
     getFilesAccess(path).then(result => {
       populateFiles(result);
+      console.log(result);
     });
   };
   const getFilesFromFolder = async () => {
@@ -63,8 +64,8 @@ export default function Files() {
     });
   };
   const populateFiles = async result => {
+    setStoragePath(path);
     setTimeout(async () => {
-      setStoragePath(path);
       setFiles(result);
     }, 700);
   };
@@ -77,7 +78,6 @@ export default function Files() {
   };
   const editFile = async file => {
     setSelectedFile(file[0]);
-    console.log(file[0]);
   };
   return (
     <section>
@@ -155,6 +155,7 @@ export default function Files() {
                   <th>#</th>
                   <th>Name</th>
                   <th>Select</th>
+                  <th>Description</th>
                 </tr>
               </thead>
               <tbody>
@@ -177,6 +178,9 @@ export default function Files() {
                           type="checkbox"
                           onClick={e => handleChange(e.target, file)}
                         />
+                      </td>
+                      <td className="has-text-centered">
+                        <p>{file.data.customMetadata.description}</p>
                       </td>
                     </tr>
                   ))

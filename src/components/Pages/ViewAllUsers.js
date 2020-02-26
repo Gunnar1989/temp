@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import useAuth from "../../auth/use-auth";
 import User from "../Elements/User";
-import CreateClassRoom from "./CreateClassRoom";
 
 export default function ViewAllUsers() {
   const { getUser, getLoggedInUser, getUserGroups, getImage } = useAuth();
   const [users, setUsers] = useState([]);
-  const [modalActive, setModalActive] = useState(false);
   const [groups, setGroups] = useState([]);
   const [user, setUser] = useState("");
   const [image, setImage] = useState("");
@@ -56,15 +54,6 @@ export default function ViewAllUsers() {
           </table>
         </div>
         <div className="column">
-          <a onClick={() => setModalActive(!modalActive)}>Create Class Room</a>
-
-          {modalActive && (
-            <CreateClassRoom
-              modalState={modalActive}
-              setModalState={setModalActive}
-            />
-          )}
-
           {user && <User groups={groups} userInfo={user} img={image} />}
         </div>
       </div>

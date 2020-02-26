@@ -27,13 +27,11 @@ export default function App() {
               component={ROUTES.DASHBOARD.COMPONENT}
             />
           ) : (
-            <>
-              <Route
-                exact
-                path={ROUTES.HOME.PATH}
-                component={ROUTES.HOME.COMPONENT}
-              />
-            </>
+            <Route
+              exact
+              path={ROUTES.HOME.PATH}
+              component={ROUTES.HOME.COMPONENT}
+            />
           )}
           {routes ? (
             <>
@@ -45,13 +43,15 @@ export default function App() {
                 path={ROUTES.VIEW_ALL_USERS.PATH}
                 component={ROUTES.VIEW_ALL_USERS.COMPONENT}
               />
+              <Route
+                path={ROUTES.VIEW_ALL_GROUPS.PATH}
+                component={ROUTES.VIEW_ALL_GROUPS.COMPONENT}
+              />
               <Route path="/editgroup/:id" children={<EditGroup />} />
               <Route path="/files/:path" children={<Files />} />
             </>
           ) : (
-            <>
-              <p>Access Denied</p>
-            </>
+            <p>Access Denied</p>
           )}
         </Switch>
         <Footer />

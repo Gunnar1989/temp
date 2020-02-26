@@ -70,7 +70,7 @@ export default function DashBoard() {
           <Card
             path={ROUTES.VIEW_ALL_GROUPS.PATH}
             img={
-              "http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Files-icon.png"
+              "http://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-drives/512/Group-icon.png"
             }
             title={"Edit Group"}
             type={"Admin"}

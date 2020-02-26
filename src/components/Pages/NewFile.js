@@ -14,6 +14,8 @@ export default function NewFile({
 }) {
   const [selectedFolder, setSelectedFolder] = useState(location);
   const [file, setFile] = useState("");
+  const [description, setDescription] = useState("");
+  const [group, setGroup] = useState("");
   const { uploadSharedFile } = useAuth();
 
   if (!modalState) {
@@ -48,6 +50,32 @@ export default function NewFile({
                 </div>
               </div>
             </div>
+            <div className="field-label is-pulled-left is-normal">
+              <label className="label">Group:</label>
+            </div>
+            <div class="field">
+              <div class="control">
+                <input
+                  className="input"
+                  onChange={e => setGroup(e.target.value)}
+                  type="text"
+                  name="resume"
+                />
+              </div>
+            </div>
+            <div className="field-label is-pulled-left is-normal">
+              <label className="label">Description:</label>
+            </div>
+            <div class="field">
+              <div class="control">
+                <input
+                  className="input"
+                  onChange={e => setDescription(e.target.value)}
+                  type="text"
+                  name="resume"
+                />
+              </div>
+            </div>
             <label className="file-label">
               <input
                 className="file-input"
@@ -70,7 +98,7 @@ export default function NewFile({
             value="Press To Upload"
             disabled={file === ""}
             onClick={() => {
-              uploadSharedFile(file, "Math");
+              uploadSharedFile(file, group, description);
             }}
             type="button"
             className="button is-success"
