@@ -16,14 +16,14 @@ export default function NewFile({
   const [file, setFile] = useState("");
   const [description, setDescription] = useState("");
   const [group, setGroup] = useState("");
-  const { uploadSharedFile } = useAuth();
-
+  const { uploadSharedFile, user } = useAuth();
   if (!modalState) {
     return null;
   }
 
   const closeModal = () => {
     modalState = setModalState(!modalState);
+    console.log(user);
   };
   return (
     <div className="modal is-active has-shadow">
@@ -98,7 +98,7 @@ export default function NewFile({
             value="Press To Upload"
             disabled={file === ""}
             onClick={() => {
-              uploadSharedFile(file, group, description);
+              uploadSharedFile(file, group, description, user.displayName);
             }}
             type="button"
             className="button is-success"

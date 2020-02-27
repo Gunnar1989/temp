@@ -313,12 +313,13 @@ export function AuthProvider({ initialUser, children }) {
       }
     );
   };
-  const uploadSharedFile = (file, classroom, descriptionData) => {
+  const uploadSharedFile = (file, classroom, descriptionData, displayName) => {
     const storage = firebase.storage();
     var metadata = {
       customMetadata: {
         access: classroom,
-        description: descriptionData
+        description: descriptionData,
+        owner: displayName
       }
     };
     const uploadTask = storage.ref(`shared/${file.name}`).put(file, metadata);
