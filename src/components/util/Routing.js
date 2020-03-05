@@ -33,7 +33,7 @@ export const EDIT_PROFILE = {
 };
 export const VIEW_ALL_GROUPS = {
   PATH: "/viewallgroups",
-  NAME: "Edit Groups",
+  NAME: "Manage Classes",
   COMPONENT: ViewAllGroups
 };
 export const EDIT_GROUP = {

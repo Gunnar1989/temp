@@ -7,7 +7,7 @@ import ImageUpload from "../Elements/ImageUpload";
 NEED TO REFACTOR 
 FIX UPLOADFILETOLOCATION BRAH
 */
-export default function CreateClassRoom({ modalState, setModalState }) {
+export default function ModalCreateClassRoom({ modalState, setModalState }) {
   const { getAllUsers, createUserGroup } = useAuth();
   const [classroomName, setClassroomName] = useState("");
   const [classroomPath, setClassroomPath] = useState("");
@@ -76,7 +76,7 @@ export default function CreateClassRoom({ modalState, setModalState }) {
                     className="input"
                     placeholder="Science?"
                     type="text"
-                    onChange={e => setClassroomName(e.target.value)}
+                    onChange={e => handleChange(e.target.value)}
                   ></input>
                 </div>
                 <div className="field-label is-pulled-left is-normal">

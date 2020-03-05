@@ -27,6 +27,7 @@ const reducer = (state, action) => {
       return {
         user: action.payload.user,
         userAccess: action.payload.userAccess,
+        userInfo: action.payload.userInfo,
         isInitiallyLoading: false,
         isLoading: false,
         progress: 0,
@@ -47,11 +48,14 @@ const AuthContext = React.createContext(undefined);
 
 export function AuthProvider({ initialUser, children }) {
   const [userAccess, setUserAccess] = useState([]);
+  const [tempGroup, setTempGroup] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
   const [state, dispatch] = React.useReducer(reducer, {
     isInitiallyLoading: true,
     isLoading: false,
     user: null,
     userAccess: [],
+    userInfo: [],
     isLoggedIn: [],
     progress: 0 // delete
   });
@@ -76,6 +80,8 @@ export function AuthProvider({ initialUser, children }) {
         };
         const access = await getUserAccess(user);
         setUserAccess(access);
+        const userinfo = await getLoggedInUser(user.uid);
+        setUserInfo(userinfo[0]);
         metadataRef.on("value", callback);
         if (signingInSoDontDispatchOnAuthStateChange.current) {
           signingInSoDontDispatchOnAuthStateChange.current = false;
@@ -85,6 +91,7 @@ export function AuthProvider({ initialUser, children }) {
           type: AuthProvider.actions.setUser,
           payload: {
             user,
+            userInfo,
             userAccess
           }
         });
@@ -201,6 +208,22 @@ export function AuthProvider({ initialUser, children }) {
       snapshot.forEach(doc => group.push(doc.data()));
     });
     return group;
+  };
+  const getAllUsersExecptMembers = localgroup => {
+    let group = getAllUsers();
+    var bar = new Promise((resolve, reject) => {
+      group.forEach(user => {
+        localgroup.forEach(local => {
+          if (local == user.userId) {
+            group = HELPER.arrayRemove(group, user);
+            resolve();
+          }
+        });
+      });
+    });
+    bar.then(() => {
+      return group;
+    });
   };
   const getGroupInfo = async title => {
     const db = firebase.firestore();
@@ -658,6 +681,7 @@ export function AuthProvider({ initialUser, children }) {
     downloadFile,
     downloadMulti,
     getAllUsers,
+    getAllUsersExecptMembers,
     getClassRoomImage,
     getClassRooms,
     getFiles,
@@ -681,7 +705,8 @@ export function AuthProvider({ initialUser, children }) {
     uploadImage,
     uploadSharedFile,
     user: initialUser || state.user,
-    userAccess: userAccess
+    userAccess: userAccess,
+    userInfo: userInfo
   };
 
   return state.isInitiallyLoading ? (

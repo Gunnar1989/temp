@@ -12,7 +12,7 @@ export default function Files() {
   const [folders, setFolders] = useState([]);
   const [files, setFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState("");
-  const [selectFiles, setSelectFiles] = useState([]);
+  const [selectFiles, setSelectFiles] = useState("");
   const [storagePath, setStoragePath] = useState("");
   const {
     getClassRooms,
