@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Card({ path, img, title, type }) {
+  const [hover, setHover] = useState(false);
+  const effect = {
+    transition: {
+      type: "spring",
+      stiffness: 20,
+      restDelta: 2
+    }
+  };
   return (
-    <div className="column is-one-quarter">
+    <motion.div
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 1 }}
+      className="column card-column has-background-primary is-two-fifths"
+    >
       <Link to={path}>
-        <article className="tile has-background-primary is-child box">
-          <h1 className="title has-text-centered has-text-white-ter">
-            {title}
-          </h1>
-          <figure className="image is-4by3">
-            <img alt="Profile" loading="lazy" src={img}></img>
-          </figure>
-          <hr />
-          <p className="subtitle has-text-centered has-text-white-ter">
-            {type}
-          </p>
-        </article>
+        <p className="type">{type}</p>
+
+        <p class="title has-text-white-ter">{title}</p>
+        <img src={img} alt="Image" />
       </Link>
-    </div>
+    </motion.div>
   );
 }

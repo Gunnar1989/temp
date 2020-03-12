@@ -52,20 +52,22 @@ export default function DashBoard() {
     <section>
       <div className="container">
         <h1 className="title">Dashboard</h1>
-        <div className="columns is-multiline">
+        <div className="columns has-background-white is-multiline">
           <Card
             path={ROUTES.EDIT_PROFILE.PATH}
-            img={image}
-            title={"Profile"}
-            type={"Edit your profile"}
+            img={
+              "https://2x1dks3q6aoj44bz1r1tr92f-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/Square-face-shape-bespke-unit-Bordered-700x700.png"
+            }
+            title={"Edit your profile"}
+            type={ROUTES.EDIT_PROFILE.TYPE}
           />
           <Card
             path={ROUTES.VIEW_ALL_USERS.PATH}
             img={
               "http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Files-icon.png"
             }
-            title={"Edit Users"}
-            type={"Admin"}
+            title={"Manage Users"}
+            type={ROUTES.VIEW_ALL_USERS.TYPE}
           />
           <Card
             path={ROUTES.VIEW_ALL_GROUPS.PATH}

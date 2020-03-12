@@ -23,12 +23,14 @@ export const ACCOUNT = {
 };
 export const VIEW_ALL_USERS = {
   PATH: "/viewalluser",
-  NAME: "All Users",
+  NAME: "Manage Users",
+  TYPE: "Admin",
   COMPONENT: ViewAllusers
 };
 export const EDIT_PROFILE = {
   PATH: "/editprofile",
   NAME: "Edit Profile",
+  TYPE: "Settings",
   COMPONENT: EditProfile
 };
 export const VIEW_ALL_GROUPS = {

@@ -1,43 +1,18 @@
 import React, { useState } from "react";
 import HeaderLogin from "./HeaderLogin";
+import AdminPanel from "./AdminPanel";
 import { withRouter } from "react-router-dom";
 import Navigation from "../Elements/Navigation";
+import MyClassRooms from "./MyClassRooms";
 
 function Header() {
-  const [active, setActive] = useState(false);
   return (
-    <nav
-      className="bd-navbar navbar has-shadow has-background-primary is-spaced"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <a
-        alt="menu"
-        role="button"
-        className={
-          active ? "navbar-burger burger" : "navbar-burger burger is-active"
-        }
-        aria-label="menu"
-        aria-expanded="false"
-        data-target="Links"
-        onClick={() => setActive(!active)}
-      >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-      <div
-        id="Links"
-        className={
-          active
-            ? "navbar-menu"
-            : "navbar-menu has-background-primary has-text-centered is-active"
-        }
-      >
-        <Navigation />
-        <HeaderLogin />
-      </div>
-    </nav>
+    <aside class="column has-background-danger is-2 is-narrow-mobile is-fullheight section is-hidden-mobile">
+      <HeaderLogin />
+      <Navigation />
+      <MyClassRooms />
+      <AdminPanel />
+    </aside>
   );
 }
 export default withRouter(Header);

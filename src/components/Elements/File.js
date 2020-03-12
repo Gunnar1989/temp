@@ -32,7 +32,7 @@ export default function File({ selectedFile }) {
       <div className="label-body">
         <div className="field">
           <div className="control">
-            <p>{selectedFile.data.size / 1000} mb</p>
+            <p>{selectedFile.data.size / 1000000} mb</p>
           </div>
         </div>
       </div>

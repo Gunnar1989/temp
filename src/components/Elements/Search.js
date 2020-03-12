@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Search from "react-search";
 import * as HELPER from "../util/use";
 
 export default function SearchEngine({ groups, setGroups }) {

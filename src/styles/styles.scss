@@ -7,9 +7,51 @@ body {
   background-color: $lightblue;
   font-family: "Lato", sans-serif;
 }
+.checkbox input {
+  margin-right: 10px;
+}
+.menu-list {
+  padding: 10px;
+}
 .profile {
   width: auto;
   height: 200px;
+}
+.small-link {
+  a {
+    font-size: 8px;
+  }
+}
+#arrow-down {
+  height: 14px;
+}
+.arrow-white {
+  color: #fff;
+}
+.card-column {
+  margin: 20px 0 0 40px;
+  border-radius: 15px !important;
+  height: 300px;
+  position: relative;
+  .type {
+    background-color: white;
+    padding: 3px;
+    border-radius: 5%;
+    color: $black;
+    display: inline;
+  }
+  img {
+    position: absolute;
+    border-radius: 50%;
+    right: 10px;
+    bottom: 10px;
+    height: 100px;
+    width: 100px;
+  }
+  .title {
+    padding: 20%;
+    text-align: center;
+  }
 }
 .table-body {
   a {

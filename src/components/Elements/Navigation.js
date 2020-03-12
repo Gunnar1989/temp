@@ -3,11 +3,20 @@ import { Link } from "react-router-dom";
 import * as ROUTES from "../util/Routing";
 
 const Navigation = () => (
-  <div className="navbar-start ">
-    <Link className="navbar-item" to={ROUTES.HOME.PATH}>
-      Home
-    </Link>
-  </div>
+  <>
+    <ul class="menu-list">
+      <li class="menu-label is-hidden-touch">
+        Menu
+        <ul>
+          <li>
+            <Link className="" to={ROUTES.HOME.PATH}>
+              {ROUTES.DASHBOARD.NAME}
+            </Link>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </>
 );
 
 export default Navigation;
