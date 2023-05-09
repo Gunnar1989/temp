@@ -10,7 +10,7 @@
     "@fortawesome/react-fontawesome": "^0.1.9",
     "bulma": "^0.8.0",
     "firebase": "^7.6.2",
-    "firebase-admin": "^8.6.0",
+    "firebase-admin": "^11.8.0",
     "framer-motion": "^1.9.1",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
